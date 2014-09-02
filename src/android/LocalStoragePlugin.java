@@ -33,24 +33,23 @@ public class LocalStoragePlugin extends CordovaPlugin {
         Log.d(pluginName, "LocalStoragePlugin execute action: "+ action + " args: " + args.toString());
         JSONObject o;
 
-        switch(action){
-            case "getItem" : 
-                o = args.getJSONObject(0);
-                callbackContext.success(this.localStorage.getItem(o.getString("key")));
-                break;
-            case "setItem" :
-                o = args.getJSONObject(0);
-                this.localStorage.setItem(o.getString("key"), o.getString("value"));
-                break;
-            case "removeItem" :
-                o = args.getJSONObject(0);
-                this.localStorage.removeItem(o.getString("key"));
-                break;
-            case "clear" :
-                this.localStorage.clear();
-                break;
-            default :
-                return false;
+        if(action.equalsIgnoreCase("getItem")){
+            o = args.getJSONObject(0);
+            callbackContext.success(this.localStorage.getItem(o.getString("key")));    
+        }
+        else if(action.equalsIgnoreCase("setItem")){ 
+            o = args.getJSONObject(0);
+            this.localStorage.setItem(o.getString("key"), o.getString("value"));    
+        }
+        else if(action.equalsIgnoreCase("removeItem")){ 
+            o = args.getJSONObject(0);
+            this.localStorage.removeItem(o.getString("key"));
+        }
+        else if(action.equalsIgnoreCase("clear")){ 
+            this.localStorage.clear();
+        }
+        else{ 
+            return false;
         }
         return true;
 
