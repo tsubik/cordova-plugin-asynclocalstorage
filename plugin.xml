@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="com.tsubik.cordova.plugin.asynclocalstorage" version="1.0.0">
+
+    <name>LocalStoragePlugin</name>
+
+    <description>
+        A better localStorage for cordova apps
+    </description>
+
+    <engines>
+        <engine name="cordova" version=">=2.7.0" />
+    </engines>
+
+    <js-module src="www/localStorage.js" name="AsyncLocalStorage">
+        <clobbers target="asyncLocalStorage" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="LocalStoragePlugin">
+              <param name="android-package" value="com.tsubik.cordova.plugin.asynclocalstorage.LocalStoragePlugin"/>
+            </feature> 
+        </config-file>
+
+        <source-file src="src/android/LocalStorage.java" target-dir="src/com/tsubik/cordova/plugin/asynclocalstorage" />
+        <source-file src="src/android/LocalStorageDBHelper.java" target-dir="src/com/tsubik/cordova/plugin/asynclocalstorage" />
+        <source-file src="src/android/LocalStoragePlugin.java" target-dir="src/com/tsubik/cordova/plugin/asynclocalstorage" />
+    </platform>
+
+</plugin>
